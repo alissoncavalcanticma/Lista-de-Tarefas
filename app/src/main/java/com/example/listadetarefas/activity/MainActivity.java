@@ -1,22 +1,32 @@
-package com.example.listadetarefas;
+package com.example.listadetarefas.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Adapter;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import com.example.listadetarefas.R;
+import com.example.listadetarefas.model.Tarefa;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private Adapter tarefaAdapter;
+    private List<Tarefa> listaTarefas = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +47,30 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void carregarListaTarefas(){
+
+        // 1º - Carregar os dados
+        //Carregar tarefas
+
+        Tarefa tarefa1 = new Tarefa("tarefa1", "vazia");
+        listaTarefas.add(tarefa1);
+        Tarefa tarefa2 = new Tarefa("tarefa2", "Descrição da tarefa2");
+        listaTarefas.add(tarefa2);
+
+        // 2º - Configurar a exibição
+        //Configurar um Adapter
+
+        tarefaAdapter = new Adapter(listaTarefas);
+
+        //Configurar o RecyclerView
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
+
     }
 
     @Override
