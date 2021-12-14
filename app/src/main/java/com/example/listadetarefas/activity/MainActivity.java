@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.listadetarefas.R;
+import com.example.listadetarefas.adapter.TarefaAdapter;
 import com.example.listadetarefas.model.Tarefa;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -24,7 +24,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private Adapter tarefaAdapter;
+    private TarefaAdapter tarefaAdapter;
     private List<Tarefa> listaTarefas = new ArrayList<>();
 
 
@@ -47,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    @Override
+    protected void onStart() {
+        carregarListaTarefas();
+        super.onStart();
     }
 
     public void carregarListaTarefas(){
@@ -62,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         // 2º - Configurar a exibição
         //Configurar um Adapter
 
-        tarefaAdapter = new Adapter(listaTarefas);
+        tarefaAdapter = new TarefaAdapter(listaTarefas);
 
         //Configurar o RecyclerView
 
@@ -70,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
+        recyclerView.setAdapter(tarefaAdapter);
 
     }
 

@@ -1078,6 +1078,7 @@ id custom
 id customPanel
 id decor_content_parent
 id default_activity_button
+id descricao
 id design_bottom_sheet
 id design_menu_item_action_area
 id design_menu_item_action_area_stub
@@ -1209,6 +1210,7 @@ id time
 id title
 id titleDividerNoCustom
 id title_template
+id titulo
 id toolbar
 id top
 id topPanel
@@ -1291,6 +1293,7 @@ layout design_navigation_item_subheader
 layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_password_icon
+layout lista_tarefa_adapter
 layout mtrl_layout_snackbar
 layout mtrl_layout_snackbar_include
 layout notification_action
