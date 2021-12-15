@@ -37,27 +37,27 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.MyViewHold
         Tarefa tarefa = listaTarefas.get(position);
 
         holder.titulo.setText(tarefa.getTitulo());
-        holder.descricao.setText(tarefa.getDescricao());
+        //holder.descricao.setText(tarefa.getDescricao());
     }
 
 
     //Verifica e conta a qtd de Blocos(holders)/ itens por exibição
     @Override
     public int getItemCount() {
-        return listaTarefas.size();
+        return this.listaTarefas.size();
     }
 
     //Técnica usada para configurar de definir os blocos no Linear Layout para exibição dos itens da lista
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView titulo;
-        TextView descricao;
+        //TextView descricao;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             titulo      = itemView.findViewById(R.id.titulo);
-            descricao   = itemView.findViewById(R.id.descricao);
+            //descricao   = itemView.findViewById(R.id.descricao);
         }
     }
 }

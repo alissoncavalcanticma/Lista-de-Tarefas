@@ -61,10 +61,21 @@ public class MainActivity extends AppCompatActivity {
         // 1º - Carregar os dados
         //Carregar tarefas
 
-        Tarefa tarefa1 = new Tarefa("tarefa1", "vazia");
-        listaTarefas.add(tarefa1);
+        /*Tarefa tarefa1 = new Tarefa("tarefa1", "vazia");
         Tarefa tarefa2 = new Tarefa("tarefa2", "Descrição da tarefa2");
+        listaTarefas.add(tarefa1);
+        listaTarefas.add(tarefa2);*/
+
+        Tarefa tarefa1 = new Tarefa();
+        tarefa1.setTitulo("Tarefa1");
+        //tarefa1.setDescricao("Descricao vazia");
+        listaTarefas.add(tarefa1);
+
+        Tarefa tarefa2 = new Tarefa();
+        tarefa2.setTitulo("Tarefa2");
+        //tarefa2.setDescricao("Descricao vazia");
         listaTarefas.add(tarefa2);
+
 
         // 2º - Configurar a exibição
         //Configurar um Adapter
