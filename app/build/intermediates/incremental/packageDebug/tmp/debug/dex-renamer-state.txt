@@ -1,4 +1,4 @@
-#Tue Dec 14 19:40:16 BRT 2021
+#Wed Dec 15 00:13:05 BRT 2021
 base.0=/home/alisson/AndroidStudioProjects/ListadeTarefas/app/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
