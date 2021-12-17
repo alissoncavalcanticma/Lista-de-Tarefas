@@ -1,5 +1,6 @@
 package com.example.listadetarefas.activity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.listadetarefas.R;
 import com.example.listadetarefas.adapter.TarefaAdapter;
+import com.example.listadetarefas.helper.DbHelper;
 import com.example.listadetarefas.helper.RecyclerItemClickListener;
 import com.example.listadetarefas.model.Tarefa;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -40,6 +42,17 @@ public class MainActivity extends AppCompatActivity {
 
         //Configurar recyclerView
         recyclerView = findViewById(R.id.recyclerView);
+
+        //Configurando Banco de dados
+
+        DbHelper db = new DbHelper(getApplicationContext());
+
+        //Instancia objecto para dar put nos dados que serão salvos no db
+        ContentValues cv = new ContentValues();
+        cv.put("titulo", "Titulo teste");
+
+        //Metodo para escrever no bd
+        db.getWritableDatabase().insert("tarefas", null ,cv);
 
         //Configurar evento de click com RecyclerItemClickListener
 
