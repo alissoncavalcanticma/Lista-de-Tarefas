@@ -1,6 +1,5 @@
 package com.example.listadetarefas.activity;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,8 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.listadetarefas.R;
 import com.example.listadetarefas.adapter.TarefaAdapter;
-import com.example.listadetarefas.helper.DbHelper;
 import com.example.listadetarefas.helper.RecyclerItemClickListener;
+import com.example.listadetarefas.helper.TarefaDAO;
 import com.example.listadetarefas.model.Tarefa;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -43,17 +42,6 @@ public class MainActivity extends AppCompatActivity {
         //Configurar recyclerView
         recyclerView = findViewById(R.id.recyclerView);
 
-        //Configurando Banco de dados
-
-        DbHelper db = new DbHelper(getApplicationContext());
-
-        //Instancia objecto para dar put nos dados que serão salvos no db
-        ContentValues cv = new ContentValues();
-        cv.put("titulo", "Titulo teste");
-
-        //Metodo para escrever no bd
-        db.getWritableDatabase().insert("tarefas", null ,cv);
-
         //Configurar evento de click com RecyclerItemClickListener
 
         recyclerView.addOnItemTouchListener(
@@ -61,7 +49,18 @@ public class MainActivity extends AppCompatActivity {
                         new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Toast.makeText(getApplicationContext(), "Click", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "Click", Toast.LENGTH_SHORT).show();
+
+                        //Recuperar tarefa selecionada
+
+                        Tarefa tarefaSelecionada = listaTarefas.get(position);
+                        //Toast.makeText(getApplicationContext(), "Position é: " + tarefaSelecionada.getId(), Toast.LENGTH_SHORT).show();
+
+                        //Mandar a position para a próxima intent
+
+                        Intent intent = new Intent(MainActivity.this, AdicionarTarefaActivity.class);
+                        intent.putExtra("tarefaSelecionada", tarefaSelecionada);
+                        startActivity(intent);
                     }
 
                     @Override
@@ -98,20 +97,8 @@ public class MainActivity extends AppCompatActivity {
         // 1º - Carregar os dados
         //Carregar tarefas
 
-        /*Tarefa tarefa1 = new Tarefa("tarefa1", "vazia");
-        Tarefa tarefa2 = new Tarefa("tarefa2", "Descrição da tarefa2");
-        listaTarefas.add(tarefa1);
-        listaTarefas.add(tarefa2);*/
-
-        Tarefa tarefa1 = new Tarefa();
-        tarefa1.setTitulo("Tarefa1");
-        //tarefa1.setDescricao("Descricao vazia");
-        listaTarefas.add(tarefa1);
-
-        Tarefa tarefa2 = new Tarefa();
-        tarefa2.setTitulo("Tarefa2");
-        //tarefa2.setDescricao("Descricao vazia");
-        listaTarefas.add(tarefa2);
+        TarefaDAO tarefaDao = new TarefaDAO(getApplicationContext());
+        listaTarefas = tarefaDao.listar();
 
 
         // 2º - Configurar a exibição
